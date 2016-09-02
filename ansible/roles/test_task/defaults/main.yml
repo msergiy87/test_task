@@ -1,0 +1,8 @@
+---
+# defaults file for test_task
+
+wp_mysql_db: wordpress
+wp_mysql_user: wordpress
+wp_mysql_password: wp_db_password
+
+# mysql_root_password: root_password

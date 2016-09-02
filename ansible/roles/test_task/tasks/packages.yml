@@ -1,0 +1,26 @@
+---
+# tasks file for test_task
+
+- name: packages | Delete packages
+  apt: pkg={{ item }} state=absent
+  with_items:
+    - openbsd-inetd
+    - nfs-common
+    - portmap
+    - rpcbind
+
+- name: packages | Install packages
+  apt: pkg={{ item }} state=present update_cache=true
+  with_items:
+    - sysv-rc-conf
+    - mc
+    - bind9-host
+    - bzip2
+    - tcpdump
+    - telnet
+    - dnstracer
+    - less
+    - heirloom-mailx
+    - htop
+    - vim
+    - screen

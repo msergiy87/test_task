@@ -1,0 +1,24 @@
+---
+# tasks file for test_task
+
+- name: mysql | Install mysql
+  apt: pkg=mysql-server state=present update_cache=true
+
+- name: mysql | Install mysql
+  apt: pkg=python-mysqldb state=present update_cache=true
+
+- name: mysql | Create mysql database
+  mysql_db: name={{ wp_mysql_db }} state=present
+
+- name: mysql | Create mysql user
+  mysql_user:
+    name={{ wp_mysql_user }} 
+    password={{ wp_mysql_password }} 
+    priv=*.*:ALL
+
+#- name: Set root user password
+#  mysql_user:
+#    name: root
+#    password: "{{ mysql_root_password }}"
+#    check_implicit_admin: true
+#    update_password: always

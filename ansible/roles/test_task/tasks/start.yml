@@ -1,0 +1,17 @@
+---
+# tasks file for test_task
+
+- name: start | Copy file /etc/modprobe.d/blacklist
+  copy: src=start/blacklist dest=/etc/modprobe.d/blacklist owner=root group=root mode=0644
+
+- name: start | Replace and add lines /etc/default/rcS
+  lineinfile: dest=/etc/default/rcS regexp="TMPTIME=" line="TMPTIME=0" backrefs=yes backup=yes
+
+- lineinfile: dest=/etc/default/rcS regexp="SULOGIN=" line="SULOGIN=no" backrefs=yes
+- lineinfile: dest=/etc/default/rcS regexp="DELAYLOGIN=" line="DELAYLOGIN=no" backrefs=yes
+- lineinfile: dest=/etc/default/rcS regexp="VERBOSE=" line="VERBOSE=yes" backrefs=yes
+- lineinfile: dest=/etc/default/rcS regexp="FSCKFIX=" line="FSCKFIX=yes" backrefs=yes
+
+- lineinfile: dest=/etc/default/rcS line="UTC=yes"
+- lineinfile: dest=/etc/default/rcS line="RAMRUN=yes"
+- lineinfile: dest=/etc/default/rcS line="RAMLOCK=no"

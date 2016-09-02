@@ -1,0 +1,21 @@
+---
+# tasks file for test_task
+
+- name: php | Install php
+  apt: pkg={{ item }} state=present update_cache=true
+  with_items:
+    - php5
+    - php-pear
+    - php5-mysql
+    - php5-gd
+    - libapache2-mod-php5
+    - php5-mcrypt
+    - libssh2-php
+
+- name: php | Replace line
+  lineinfile: dest=/etc/php5/apache2/php.ini regexp="expose_php" line="expose_php = Off" backrefs=yes backup=yes
+
+- lineinfile: dest=/etc/php5/cli/php.ini regexp="expose_php" line="expose_php = Off" backrefs=yes backup=yes
+  notify:
+    - restart apache
+

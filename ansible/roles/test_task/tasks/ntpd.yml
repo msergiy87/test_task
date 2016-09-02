@@ -1,0 +1,29 @@
+---
+# tasks file for test_task
+
+- name: ntpd | Install ntpd ntpdate
+  apt: pkg={{ item }} state=present update_cache=true
+  with_items:
+    - ntp
+    - ntpdate
+
+- name: ntpd | Change line in file /etc/default/ntp
+  lineinfile: dest=/etc/default/ntp regexp="^NTPD_OPTS=" line='NTPD_OPTS="-L -g -l /var/log/ntpd.log"' backrefs=yes
+
+- name: ntpd | Replace line
+  lineinfile: dest=/etc/ntp.conf regexp="^server [0-3]+\.[a-z]+\.pool+\.ntp+\.org" state=absent  backup=yes
+
+- name: ntpd | Add line
+  lineinfile: dest=/etc/ntp.conf line="server ntp.time.in.ua"
+
+- name: ntpd | Add lines
+  lineinfile: dest=/etc/ntp.conf line="server ntp{{ item }}.time.in.ua"
+  with_items:
+    - 2
+    - 3
+
+- name: ntpd | Add line
+  lineinfile: dest=/etc/ntp.conf line="disable monitor"
+  notify:
+    - restart ntp
+    - synchronize_time

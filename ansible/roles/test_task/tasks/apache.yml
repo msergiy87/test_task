@@ -1,0 +1,13 @@
+---
+# tasks file for test_task
+
+- name: apache | Install apache
+  apt: pkg=apache2 state=present update_cache=true
+
+- name: apache | Add line in file /etc/apache2/apache2.conf
+  lineinfile: dest=/etc/apache2/apache2.conf line="{{ item }}"
+  with_items:
+    - ServerTokens ProductOnly
+    - ServerSignature Off
+  notify:
+    - restart apache

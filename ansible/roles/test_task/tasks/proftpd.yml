@@ -1,0 +1,10 @@
+---
+# tasks file for test_task
+
+- name: proftpd | Install proftpd
+  apt: pkg=proftpd-basic state=present update_cache=true
+
+- name: proftpd | Add line in file /etc/proftpd/proftpd.conf
+  lineinfile: dest=/etc/proftpd/proftpd.conf line="ServerIdent off"
+  notify:
+    - restart proftpd

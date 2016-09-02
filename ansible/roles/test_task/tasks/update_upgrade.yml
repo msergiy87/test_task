@@ -1,0 +1,8 @@
+---
+# tasks file for test_task
+
+- name: update_upgrade | Update and upgrade apt-based Linux
+  apt: update_cache=yes upgrade=yes state=latest
+
+#- name: upgrade a server
+#  apt: upgrade=full

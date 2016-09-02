@@ -1,0 +1,15 @@
+---
+# tasks file for test_task
+
+- include: update_upgrade.yml
+- include: start.yml
+- include: packages.yml
+- include: ntpd.yml
+
+- include: apache.yml
+- include: mysql.yml
+- include: php.yml
+- include: proftpd.yml
+
+- include: create_site.yml
+- include: zabbix_agent.yml

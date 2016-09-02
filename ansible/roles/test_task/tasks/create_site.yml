@@ -1,0 +1,32 @@
+---
+# tasks file for test_task
+
+- name: create_site | Download Site  
+  get_url: 
+    url=http://ispc-test.kpi.ua/my/mysupersite.tar.gz 
+    dest=/tmp/mysupersite.tar.gz
+    validate_certs=no
+
+- name: create_site | Extract Site
+  unarchive: src=/tmp/mysupersite.tar.gz dest=/var/www/ copy=no creates=/var/www/wordpress/wp-config.php
+
+- name: create_site | Change owner
+  file: path=/var/www/wordpress state=directory owner=www-data group=www-data mode=0755 recurse=yes
+
+- name: create_site | Download database
+  get_url: 
+    url=http://ispc-test.kpi.ua/my/backup_mysupersite.sql
+    dest=/tmp/backup_mysupersite.sql
+    validate_certs=no
+
+- name: create_site | Deploy database
+  mysql_db: name=wordpress state=import target=/tmp/backup_mysupersite.sql
+
+- name: create_site | Update default Apache site
+  lineinfile: 
+    dest=/etc/apache2/sites-enabled/000-default.conf 
+    regexp="(.)+DocumentRoot /var/www/html"
+    line="DocumentRoot /var/www/wordpress"
+    backrefs=yes
+  notify:
+    - restart apache

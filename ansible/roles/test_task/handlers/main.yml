@@ -1,0 +1,26 @@
+---
+# handlers file for test_task
+
+- name: restart ntp
+  service: name=ntp state=restarted
+
+# Test
+- name: synchronize_time
+  shell: >
+    /etc/init.d/ntp stop &&
+    /usr/sbin/ntpdate ntp.time.in.ua &&
+    /usr/sbin/ntpdate ntp2.time.in.ua &&
+    /usr/sbin/ntpdate ntp3.time.in.ua &&
+    /etc/init.d/ntp start
+
+- name: restart apache
+  service: name=apache2 state=restarted
+
+- name: restart mysql
+  service: name=mysqld state=restarted
+
+- name: restart proftpd
+  service: name=proftpd state=restarted
+
+- name: restart zabbix-agent
+  service: name=zabbix-agent state=restarted

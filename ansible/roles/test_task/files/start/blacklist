@@ -1,0 +1,9 @@
+blacklist ipv6
+
+blacklist snd_pcm
+blacklist snd_timer
+blacklist snd
+blacklist soundcore
+blacklist snd_page_alloc
+
+blacklist pcspkr
