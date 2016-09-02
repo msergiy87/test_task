@@ -1,9 +1,9 @@
 # test_task
 
-Опреаційна система - Ubuntu 14.04
-Інструмент - Ansible
-Web server - Apache
-Database - Mysql
+- Опреаційна система - Ubuntu 14.04
+- Інструмент - Ansible
+- Web server - Apache
+- Database - Mysql
 
 ansible-playbook -i hosts test_task.yml
 
