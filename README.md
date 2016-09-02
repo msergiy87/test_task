@@ -5,6 +5,8 @@
 - Web server - Apache
 - Database - Mysql
 
+команда для запуску:
+
 ansible-playbook -i hosts test_task.yml
 
 Проводиться початкова конфігурація сервера (172.16.22.251).
