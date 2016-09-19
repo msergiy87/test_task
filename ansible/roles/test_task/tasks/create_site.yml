@@ -3,7 +3,7 @@
 
 - name: create_site | Download Site  
   get_url: 
-    url=http://ispc-test.kpi.ua/my/mysupersite.tar.gz 
+    url=http://test.ua/my/mysupersite.tar.gz 
     dest=/tmp/mysupersite.tar.gz
     validate_certs=no
 
@@ -15,7 +15,7 @@
 
 - name: create_site | Download database
   get_url: 
-    url=http://ispc-test.kpi.ua/my/backup_mysupersite.sql
+    url=http://test.ua/my/backup_mysupersite.sql
     dest=/tmp/backup_mysupersite.sql
     validate_certs=no
 
